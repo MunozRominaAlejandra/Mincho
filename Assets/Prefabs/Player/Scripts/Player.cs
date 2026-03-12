@@ -5,7 +5,7 @@ public class Player : MonoBehaviour
 {
     #region Variables
     public float maxHealth = 100f;
-    float currentHealth;
+    public float currentHealth;
 
     [Header("Referencias de Vida")]
     public Slider healthBar;
@@ -13,8 +13,8 @@ public class Player : MonoBehaviour
 
     public float maxOxygen = 100f;
     public float oxygenDrainRate = 1f;
-    float currentOxygen;
-    float oxygenMultiplier = 1f;
+    public float currentOxygen;
+    public float oxygenMultiplier = 1f;
 
     [Header("Referencias de Oxígeno")]
     public Slider oxygenBar;
