@@ -13,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
 
     #region Variables
     private Rigidbody2D rb;
+    private Animator animator;
     private bool isGrounded;
     private int jumpCount; // Contador para el doble salto
     private int maxJumps = 2;
@@ -22,6 +23,7 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
     }
 
     void Update()
@@ -29,6 +31,7 @@ public class PlayerMovement : MonoBehaviour
         Move();
         Jump();
         CheckForCollectables();
+        Animations();
     }
 
     void Move()
@@ -73,6 +76,16 @@ public class PlayerMovement : MonoBehaviour
                 Destroy(hit.collider.gameObject);
             }
         }
+    }
+
+    void Animations()
+    {
+        // Si la velocidad horizontal no es 0, está caminando
+        // Mathf.Abs asegura que funcione aunque el valor sea negativo (-1)
+        bool walking = Mathf.Abs(rb.linearVelocity.x) > 0.1f;
+
+        // Sincronizamos con el parámetro del Animator
+        animator.SetBool("isWalking", walking);
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
